@@ -1,0 +1,115 @@
+---
+title: "Tarea del Optativo de R"
+author: "Tomás Péndola"
+format:
+  html:
+    toc: true
+    number-sections: true
+editor: visual
+---
+
+# Presentacion de Tarea del Optativo
+
+
+El tema a investigar es si es que el bien estar emocionalsegun genero incide dentro de la calidad de vida 
+
+# Cargar paquetes
+
+```{r}
+pacman::p_load(sjlabelled,
+               dplyr, #Manipulacion de datos
+              stargazer, #Tablas
+              sjmisc, # Tablas
+              summarytools, # Tablas
+              kableExtra, #Tablas
+              sjPlot, #Tablas y gráficos
+              corrplot, # Correlaciones
+              sessioninfo, # Información de la sesión de trabajo
+              ggplot2) # Para la mayoría de los gráficos
+```
+
+# Cargar datos 
+
+```{r}
+load("~/Tarea-del-Optativo-de-R/Input/Data/20240516_enssex_data.rdata")
+```
+
+
+# Seleccion de variables a trabajar 
+```{r}
+
+Enssex <- enssex4 %>% select(p1,
+                             p8, 
+                             i_2_p9)
+
+
+```
+
+con esto escogemos las varaiable de genero con el que se indentifica, junto a la calidad de vida y el bienestar emocional 
+
+
+# Recodificaciond de la variable P1
+
+```{r}
+
+p1 <- as_factor(Enssex$p1) 
+levels(p1)  
+
+Enssex$p1 <- factor(Enssex$p1,
+            labels=c( "Hombre",
+                      "Mujer"),
+            levels=c(1,2))
+
+```
+
+Con esto se recodifica la variable P1 que corresponde al genero con el cual se nace a desde un 1 o 2 a hombre o mujere directamnete 
+
+# Descriptivos de Calidad de Vida y Salud Emocioanl
+
+```{r}
+
+frq(Enssex$p8)
+
+frq(Enssex$i_2_p9)
+
+```
+
+<Se Observa que las  variable de calidad de vida (P8) y salud emocional (i_2_p9) no tiene datos perdidos por ende no se deben pero si no sabe no responde
+
+
+
+# Tabla de calidad de vida por Genero
+
+```{r}
+
+sjt.xtab(Enssex$p1, Enssex$p8, encoding = "UTF-8")
+
+```
+
+Aqui se genera la tabla de como calificaria su calidad de vida según su genero
+
+
+# Graficos 
+
+```{r}
+
+graph1 <- Enssex %>% ggplot(aes(x = p8)) + 
+  geom_bar(fill = "#66CD00")+
+  labs(title = "Calidad de Vida segun Sanidad Mental",
+       x = "Calidad de Vida",
+       y = "Sanidad Mental") +
+  theme_bw()
+
+graph1
+```
+
+
+
+
+
+
+
+
+
+
+
