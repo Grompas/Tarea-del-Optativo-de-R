@@ -10,32 +10,32 @@ editor: visual
 
 # Presentacion de Tarea del Optativo
 
-
-El tema a investigar es si es que el bien estar emocionalsegun genero incide dentro de la calidad de vida 
+El tema a investigar es si es que el bien estar emocionalsegun genero incide dentro de la calidad de vida
 
 # Cargar paquetes
 
 ```{r}
-pacman::p_load(sjlabelled,
+pacman::p_load(Haven,
+               sjlabelled,
                dplyr, #Manipulacion de datos
-              stargazer, #Tablas
-              sjmisc, # Tablas
-              summarytools, # Tablas
-              kableExtra, #Tablas
-              sjPlot, #Tablas y gráficos
-              corrplot, # Correlaciones
-              sessioninfo, # Información de la sesión de trabajo
-              ggplot2) # Para la mayoría de los gráficos
+               stargazer, #Tablas
+               sjmisc, # Tablas
+               summarytools, # Tablas
+               kableExtra, #Tablas
+               sjPlot, #Tablas y gráficos
+               corrplot, # Correlaciones
+               sessioninfo, # Información de la sesión de trabajo
+               ggplot2) # Para la mayoría de los gráficos
 ```
 
-# Cargar datos 
+# Cargar datos
 
 ```{r}
 load("~/Tarea-del-Optativo-de-R/Input/Data/20240516_enssex_data.rdata")
 ```
 
+# Seleccion de variables a trabajar
 
-# Seleccion de variables a trabajar 
 ```{r}
 
 Enssex <- enssex4 %>% select(p1,
@@ -45,8 +45,7 @@ Enssex <- enssex4 %>% select(p1,
 
 ```
 
-con esto escogemos las varaiable de genero con el que se indentifica, junto a la calidad de vida y el bienestar emocional 
-
+con esto escogemos las varaiable de genero con el que se indentifica, junto a la calidad de vida y el bienestar emocional
 
 # Recodificaciond de la variable P1
 
@@ -62,7 +61,7 @@ Enssex$p1 <- factor(Enssex$p1,
 
 ```
 
-Con esto se recodifica la variable P1 que corresponde al genero con el cual se nace a desde un 1 o 2 a hombre o mujere directamnete 
+Con esto se recodifica la variable P1 que corresponde al genero con el cual se nace a desde un 1 o 2 a hombre o mujere directamnete
 
 # Descriptivos de Calidad de Vida y Salud Emocioanl
 
@@ -74,9 +73,7 @@ frq(Enssex$i_2_p9)
 
 ```
 
-<Se Observa que las  variable de calidad de vida (P8) y salud emocional (i_2_p9) no tiene datos perdidos por ende no se deben pero si no sabe no responde
-
-
+\<Se Observa que las variable de calidad de vida (P8) y salud emocional (i_2_p9) no tiene datos perdidos por ende no se deben pero si no sabe no responde
 
 # Tabla de calidad de vida por Genero
 
@@ -88,8 +85,7 @@ sjt.xtab(Enssex$p1, Enssex$p8, encoding = "UTF-8")
 
 Aqui se genera la tabla de como calificaria su calidad de vida según su genero
 
-
-# Graficos 
+# Graficos
 
 ```{r}
 
@@ -102,14 +98,3 @@ graph1 <- Enssex %>% ggplot(aes(x = p8)) +
 
 graph1
 ```
-
-
-
-
-
-
-
-
-
-
-
